@@ -9,38 +9,177 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
+import { Route as ShellReplayRouteImport } from './routes/_shell.replay'
+import { Route as ShellManagementRouteImport } from './routes/_shell.management'
+import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
+import { Route as ShellCamerasRouteImport } from './routes/_shell.cameras'
+import { Route as ShellBevRouteImport } from './routes/_shell.bev'
+import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
+import { Route as ShellManagementUsersRouteImport } from './routes/_shell.management.users'
+import { Route as ShellManagementSettingsRouteImport } from './routes/_shell.management.settings'
+import { Route as ShellManagementCamerasRouteImport } from './routes/_shell.management.cameras'
 
+const ShellRoute = ShellRouteImport.update({
+  id: '/_shell',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellReplayRoute = ShellReplayRouteImport.update({
+  id: '/replay',
+  path: '/replay',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellManagementRoute = ShellManagementRouteImport.update({
+  id: '/management',
+  path: '/management',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellDashboardRoute = ShellDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellCamerasRoute = ShellCamerasRouteImport.update({
+  id: '/cameras',
+  path: '/cameras',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellBevRoute = ShellBevRouteImport.update({
+  id: '/bev',
+  path: '/bev',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellAnalyticsRoute = ShellAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => ShellRoute,
+} as any)
+const ShellManagementUsersRoute = ShellManagementUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => ShellManagementRoute,
+} as any)
+const ShellManagementSettingsRoute = ShellManagementSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellManagementRoute,
+} as any)
+const ShellManagementCamerasRoute = ShellManagementCamerasRouteImport.update({
+  id: '/cameras',
+  path: '/cameras',
+  getParentRoute: () => ShellManagementRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/bev': typeof ShellBevRoute
+  '/cameras': typeof ShellCamerasRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/management': typeof ShellManagementRouteWithChildren
+  '/replay': typeof ShellReplayRoute
+  '/settings': typeof ShellSettingsRoute
+  '/management/cameras': typeof ShellManagementCamerasRoute
+  '/management/settings': typeof ShellManagementSettingsRoute
+  '/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/analytics': typeof ShellAnalyticsRoute
+  '/bev': typeof ShellBevRoute
+  '/cameras': typeof ShellCamerasRoute
+  '/dashboard': typeof ShellDashboardRoute
+  '/management': typeof ShellManagementRouteWithChildren
+  '/replay': typeof ShellReplayRoute
+  '/settings': typeof ShellSettingsRoute
+  '/management/cameras': typeof ShellManagementCamerasRoute
+  '/management/settings': typeof ShellManagementSettingsRoute
+  '/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_shell': typeof ShellRouteWithChildren
+  '/_shell/analytics': typeof ShellAnalyticsRoute
+  '/_shell/bev': typeof ShellBevRoute
+  '/_shell/cameras': typeof ShellCamerasRoute
+  '/_shell/dashboard': typeof ShellDashboardRoute
+  '/_shell/management': typeof ShellManagementRouteWithChildren
+  '/_shell/replay': typeof ShellReplayRoute
+  '/_shell/settings': typeof ShellSettingsRoute
+  '/_shell/management/cameras': typeof ShellManagementCamerasRoute
+  '/_shell/management/settings': typeof ShellManagementSettingsRoute
+  '/_shell/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/analytics'
+    | '/bev'
+    | '/cameras'
+    | '/dashboard'
+    | '/management'
+    | '/replay'
+    | '/settings'
+    | '/management/cameras'
+    | '/management/settings'
+    | '/management/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/analytics'
+    | '/bev'
+    | '/cameras'
+    | '/dashboard'
+    | '/management'
+    | '/replay'
+    | '/settings'
+    | '/management/cameras'
+    | '/management/settings'
+    | '/management/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/_shell'
+    | '/_shell/analytics'
+    | '/_shell/bev'
+    | '/_shell/cameras'
+    | '/_shell/dashboard'
+    | '/_shell/management'
+    | '/_shell/replay'
+    | '/_shell/settings'
+    | '/_shell/management/cameras'
+    | '/_shell/management/settings'
+    | '/_shell/management/users'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ShellRoute: typeof ShellRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_shell': {
+      id: '/_shell'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof ShellRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +187,121 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/replay': {
+      id: '/_shell/replay'
+      path: '/replay'
+      fullPath: '/replay'
+      preLoaderRoute: typeof ShellReplayRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/management': {
+      id: '/_shell/management'
+      path: '/management'
+      fullPath: '/management'
+      preLoaderRoute: typeof ShellManagementRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/dashboard': {
+      id: '/_shell/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof ShellDashboardRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/cameras': {
+      id: '/_shell/cameras'
+      path: '/cameras'
+      fullPath: '/cameras'
+      preLoaderRoute: typeof ShellCamerasRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/bev': {
+      id: '/_shell/bev'
+      path: '/bev'
+      fullPath: '/bev'
+      preLoaderRoute: typeof ShellBevRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/analytics': {
+      id: '/_shell/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof ShellAnalyticsRouteImport
+      parentRoute: typeof ShellRoute
+    }
+    '/_shell/management/users': {
+      id: '/_shell/management/users'
+      path: '/users'
+      fullPath: '/management/users'
+      preLoaderRoute: typeof ShellManagementUsersRouteImport
+      parentRoute: typeof ShellManagementRoute
+    }
+    '/_shell/management/settings': {
+      id: '/_shell/management/settings'
+      path: '/settings'
+      fullPath: '/management/settings'
+      preLoaderRoute: typeof ShellManagementSettingsRouteImport
+      parentRoute: typeof ShellManagementRoute
+    }
+    '/_shell/management/cameras': {
+      id: '/_shell/management/cameras'
+      path: '/cameras'
+      fullPath: '/management/cameras'
+      preLoaderRoute: typeof ShellManagementCamerasRouteImport
+      parentRoute: typeof ShellManagementRoute
+    }
   }
 }
 
+interface ShellManagementRouteChildren {
+  ShellManagementCamerasRoute: typeof ShellManagementCamerasRoute
+  ShellManagementSettingsRoute: typeof ShellManagementSettingsRoute
+  ShellManagementUsersRoute: typeof ShellManagementUsersRoute
+}
+
+const ShellManagementRouteChildren: ShellManagementRouteChildren = {
+  ShellManagementCamerasRoute: ShellManagementCamerasRoute,
+  ShellManagementSettingsRoute: ShellManagementSettingsRoute,
+  ShellManagementUsersRoute: ShellManagementUsersRoute,
+}
+
+const ShellManagementRouteWithChildren = ShellManagementRoute._addFileChildren(
+  ShellManagementRouteChildren,
+)
+
+interface ShellRouteChildren {
+  ShellAnalyticsRoute: typeof ShellAnalyticsRoute
+  ShellBevRoute: typeof ShellBevRoute
+  ShellCamerasRoute: typeof ShellCamerasRoute
+  ShellDashboardRoute: typeof ShellDashboardRoute
+  ShellManagementRoute: typeof ShellManagementRouteWithChildren
+  ShellReplayRoute: typeof ShellReplayRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
+}
+
+const ShellRouteChildren: ShellRouteChildren = {
+  ShellAnalyticsRoute: ShellAnalyticsRoute,
+  ShellBevRoute: ShellBevRoute,
+  ShellCamerasRoute: ShellCamerasRoute,
+  ShellDashboardRoute: ShellDashboardRoute,
+  ShellManagementRoute: ShellManagementRouteWithChildren,
+  ShellReplayRoute: ShellReplayRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
+}
+
+const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ShellRoute: ShellRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
