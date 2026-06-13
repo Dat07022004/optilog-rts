@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ZoomIn, ZoomOut, Maximize, MousePointer2, Play, Pause, X } from "lucide-react";
+import { ZoomIn, ZoomOut, Maximize, MousePointer2, Play, Pause } from "lucide-react";
 import { PageHeader } from "@/components/app/PageHeader";
 import { Panel, PanelHeader } from "@/components/app/Panel";
 import { StatusBadge } from "@/components/app/StatusBadge";
