@@ -13,6 +13,7 @@ import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
 import { Route as ShellCamerasRouteImport } from './routes/_shell.cameras'
+import { Route as ShellBevRouteImport } from './routes/_shell.bev'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -33,14 +34,21 @@ const ShellCamerasRoute = ShellCamerasRouteImport.update({
   path: '/cameras',
   getParentRoute: () => ShellRoute,
 } as any)
+const ShellBevRoute = ShellBevRouteImport.update({
+  id: '/bev',
+  path: '/bev',
+  getParentRoute: () => ShellRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bev': typeof ShellBevRoute
   '/cameras': typeof ShellCamerasRoute
   '/dashboard': typeof ShellDashboardRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bev': typeof ShellBevRoute
   '/cameras': typeof ShellCamerasRoute
   '/dashboard': typeof ShellDashboardRoute
 }
@@ -48,15 +56,22 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_shell': typeof ShellRouteWithChildren
+  '/_shell/bev': typeof ShellBevRoute
   '/_shell/cameras': typeof ShellCamerasRoute
   '/_shell/dashboard': typeof ShellDashboardRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/cameras' | '/dashboard'
+  fullPaths: '/' | '/bev' | '/cameras' | '/dashboard'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/cameras' | '/dashboard'
-  id: '__root__' | '/' | '/_shell' | '/_shell/cameras' | '/_shell/dashboard'
+  to: '/' | '/bev' | '/cameras' | '/dashboard'
+  id:
+    | '__root__'
+    | '/'
+    | '/_shell'
+    | '/_shell/bev'
+    | '/_shell/cameras'
+    | '/_shell/dashboard'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -94,15 +109,24 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellCamerasRouteImport
       parentRoute: typeof ShellRoute
     }
+    '/_shell/bev': {
+      id: '/_shell/bev'
+      path: '/bev'
+      fullPath: '/bev'
+      preLoaderRoute: typeof ShellBevRouteImport
+      parentRoute: typeof ShellRoute
+    }
   }
 }
 
 interface ShellRouteChildren {
+  ShellBevRoute: typeof ShellBevRoute
   ShellCamerasRoute: typeof ShellCamerasRoute
   ShellDashboardRoute: typeof ShellDashboardRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
+  ShellBevRoute: ShellBevRoute,
   ShellCamerasRoute: ShellCamerasRoute,
   ShellDashboardRoute: ShellDashboardRoute,
 }
