@@ -18,6 +18,7 @@ import { Route as ShellCamerasRouteImport } from './routes/_shell.cameras'
 import { Route as ShellBevRouteImport } from './routes/_shell.bev'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellManagementUsersRouteImport } from './routes/_shell.management.users'
+import { Route as ShellManagementCamerasRouteImport } from './routes/_shell.management.cameras'
 
 const ShellRoute = ShellRouteImport.update({
   id: '/_shell',
@@ -63,6 +64,11 @@ const ShellManagementUsersRoute = ShellManagementUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => ShellManagementRoute,
 } as any)
+const ShellManagementCamerasRoute = ShellManagementCamerasRouteImport.update({
+  id: '/cameras',
+  path: '/cameras',
+  getParentRoute: () => ShellManagementRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,6 +78,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof ShellDashboardRoute
   '/management': typeof ShellManagementRouteWithChildren
   '/replay': typeof ShellReplayRoute
+  '/management/cameras': typeof ShellManagementCamerasRoute
   '/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRoutesByTo {
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof ShellDashboardRoute
   '/management': typeof ShellManagementRouteWithChildren
   '/replay': typeof ShellReplayRoute
+  '/management/cameras': typeof ShellManagementCamerasRoute
   '/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRoutesById {
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/management': typeof ShellManagementRouteWithChildren
   '/_shell/replay': typeof ShellReplayRoute
+  '/_shell/management/cameras': typeof ShellManagementCamerasRoute
   '/_shell/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRouteTypes {
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/management'
     | '/replay'
+    | '/management/cameras'
     | '/management/users'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/management'
     | '/replay'
+    | '/management/cameras'
     | '/management/users'
   id:
     | '__root__'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/_shell/dashboard'
     | '/_shell/management'
     | '/_shell/replay'
+    | '/_shell/management/cameras'
     | '/_shell/management/users'
   fileRoutesById: FileRoutesById
 }
@@ -200,14 +212,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellManagementUsersRouteImport
       parentRoute: typeof ShellManagementRoute
     }
+    '/_shell/management/cameras': {
+      id: '/_shell/management/cameras'
+      path: '/cameras'
+      fullPath: '/management/cameras'
+      preLoaderRoute: typeof ShellManagementCamerasRouteImport
+      parentRoute: typeof ShellManagementRoute
+    }
   }
 }
 
 interface ShellManagementRouteChildren {
+  ShellManagementCamerasRoute: typeof ShellManagementCamerasRoute
   ShellManagementUsersRoute: typeof ShellManagementUsersRoute
 }
 
 const ShellManagementRouteChildren: ShellManagementRouteChildren = {
+  ShellManagementCamerasRoute: ShellManagementCamerasRoute,
   ShellManagementUsersRoute: ShellManagementUsersRoute,
 }
 
