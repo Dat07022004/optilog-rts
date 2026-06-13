@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ShellRouteImport } from './routes/_shell'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ShellSettingsRouteImport } from './routes/_shell.settings'
 import { Route as ShellReplayRouteImport } from './routes/_shell.replay'
 import { Route as ShellManagementRouteImport } from './routes/_shell.management'
 import { Route as ShellDashboardRouteImport } from './routes/_shell.dashboard'
@@ -18,6 +19,7 @@ import { Route as ShellCamerasRouteImport } from './routes/_shell.cameras'
 import { Route as ShellBevRouteImport } from './routes/_shell.bev'
 import { Route as ShellAnalyticsRouteImport } from './routes/_shell.analytics'
 import { Route as ShellManagementUsersRouteImport } from './routes/_shell.management.users'
+import { Route as ShellManagementSettingsRouteImport } from './routes/_shell.management.settings'
 import { Route as ShellManagementCamerasRouteImport } from './routes/_shell.management.cameras'
 
 const ShellRoute = ShellRouteImport.update({
@@ -28,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ShellSettingsRoute = ShellSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellRoute,
 } as any)
 const ShellReplayRoute = ShellReplayRouteImport.update({
   id: '/replay',
@@ -64,6 +71,11 @@ const ShellManagementUsersRoute = ShellManagementUsersRouteImport.update({
   path: '/users',
   getParentRoute: () => ShellManagementRoute,
 } as any)
+const ShellManagementSettingsRoute = ShellManagementSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => ShellManagementRoute,
+} as any)
 const ShellManagementCamerasRoute = ShellManagementCamerasRouteImport.update({
   id: '/cameras',
   path: '/cameras',
@@ -78,7 +90,9 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof ShellDashboardRoute
   '/management': typeof ShellManagementRouteWithChildren
   '/replay': typeof ShellReplayRoute
+  '/settings': typeof ShellSettingsRoute
   '/management/cameras': typeof ShellManagementCamerasRoute
+  '/management/settings': typeof ShellManagementSettingsRoute
   '/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRoutesByTo {
@@ -89,7 +103,9 @@ export interface FileRoutesByTo {
   '/dashboard': typeof ShellDashboardRoute
   '/management': typeof ShellManagementRouteWithChildren
   '/replay': typeof ShellReplayRoute
+  '/settings': typeof ShellSettingsRoute
   '/management/cameras': typeof ShellManagementCamerasRoute
+  '/management/settings': typeof ShellManagementSettingsRoute
   '/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRoutesById {
@@ -102,7 +118,9 @@ export interface FileRoutesById {
   '/_shell/dashboard': typeof ShellDashboardRoute
   '/_shell/management': typeof ShellManagementRouteWithChildren
   '/_shell/replay': typeof ShellReplayRoute
+  '/_shell/settings': typeof ShellSettingsRoute
   '/_shell/management/cameras': typeof ShellManagementCamerasRoute
+  '/_shell/management/settings': typeof ShellManagementSettingsRoute
   '/_shell/management/users': typeof ShellManagementUsersRoute
 }
 export interface FileRouteTypes {
@@ -115,7 +133,9 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/management'
     | '/replay'
+    | '/settings'
     | '/management/cameras'
+    | '/management/settings'
     | '/management/users'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -126,7 +146,9 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/management'
     | '/replay'
+    | '/settings'
     | '/management/cameras'
+    | '/management/settings'
     | '/management/users'
   id:
     | '__root__'
@@ -138,7 +160,9 @@ export interface FileRouteTypes {
     | '/_shell/dashboard'
     | '/_shell/management'
     | '/_shell/replay'
+    | '/_shell/settings'
     | '/_shell/management/cameras'
+    | '/_shell/management/settings'
     | '/_shell/management/users'
   fileRoutesById: FileRoutesById
 }
@@ -162,6 +186,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_shell/settings': {
+      id: '/_shell/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof ShellSettingsRouteImport
+      parentRoute: typeof ShellRoute
     }
     '/_shell/replay': {
       id: '/_shell/replay'
@@ -212,6 +243,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShellManagementUsersRouteImport
       parentRoute: typeof ShellManagementRoute
     }
+    '/_shell/management/settings': {
+      id: '/_shell/management/settings'
+      path: '/settings'
+      fullPath: '/management/settings'
+      preLoaderRoute: typeof ShellManagementSettingsRouteImport
+      parentRoute: typeof ShellManagementRoute
+    }
     '/_shell/management/cameras': {
       id: '/_shell/management/cameras'
       path: '/cameras'
@@ -224,11 +262,13 @@ declare module '@tanstack/react-router' {
 
 interface ShellManagementRouteChildren {
   ShellManagementCamerasRoute: typeof ShellManagementCamerasRoute
+  ShellManagementSettingsRoute: typeof ShellManagementSettingsRoute
   ShellManagementUsersRoute: typeof ShellManagementUsersRoute
 }
 
 const ShellManagementRouteChildren: ShellManagementRouteChildren = {
   ShellManagementCamerasRoute: ShellManagementCamerasRoute,
+  ShellManagementSettingsRoute: ShellManagementSettingsRoute,
   ShellManagementUsersRoute: ShellManagementUsersRoute,
 }
 
@@ -243,6 +283,7 @@ interface ShellRouteChildren {
   ShellDashboardRoute: typeof ShellDashboardRoute
   ShellManagementRoute: typeof ShellManagementRouteWithChildren
   ShellReplayRoute: typeof ShellReplayRoute
+  ShellSettingsRoute: typeof ShellSettingsRoute
 }
 
 const ShellRouteChildren: ShellRouteChildren = {
@@ -252,6 +293,7 @@ const ShellRouteChildren: ShellRouteChildren = {
   ShellDashboardRoute: ShellDashboardRoute,
   ShellManagementRoute: ShellManagementRouteWithChildren,
   ShellReplayRoute: ShellReplayRoute,
+  ShellSettingsRoute: ShellSettingsRoute,
 }
 
 const ShellRouteWithChildren = ShellRoute._addFileChildren(ShellRouteChildren)
