@@ -95,7 +95,11 @@ function LandingPage() {
             alt="Warehouse interior with AI detection boxes tracking forklifts and workers"
             width={1920}
             height={1088}
-            className="absolute inset-0 size-full object-cover opacity-25 dark:opacity-40"
+            className="absolute inset-0 size-full object-cover opacity-15 dark:opacity-35"
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 bg-gradient-to-r from-background via-background/85 to-background/40"
           />
           <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 sm:py-28">
             <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-text-secondary">
