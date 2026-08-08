@@ -130,7 +130,63 @@
   --neutral-soft: #334155;
 }
 
+/* Landing page theme: Midnight Indigo, always dark, mono headings. */
+.landing-theme {
+  --bg-app: #0a0a1a;
+  --bg-surface: #141432;
+  --bg-surface-subtle: #10102a;
+  --bg-elevated: #1e1e5a;
+
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3b8;
+  --text-muted: #6b7391;
+  --text-inverse: #ffffff;
+
+  --border-subtle: #1e1e5a;
+  --border-strong: #4f46e5;
+
+  --brand-primary: #4f46e5;
+  --brand-primary-hover: #3f38c2;
+  --brand-primary-soft: #1e1e5a;
+
+  --info: #6366f1;
+  --info-soft: #1e1e5a;
+  --success: #34d399;
+  --success-soft: #10352b;
+  --warning: #f59e0b;
+  --warning-soft: #3a2606;
+  --danger: #f43f5e;
+  --danger-soft: #3d0d19;
+  --neutral: #6b7391;
+  --neutral-soft: #1a1a3a;
+
+  --focus-ring: #4f46e5;
+
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-family: "Work Sans", var(--font-sans);
+}
+
+.landing-theme h1,
+.landing-theme h2,
+.landing-theme h3,
+.landing-theme h4 {
+  font-family: "JetBrains Mono", var(--font-mono);
+}
+
+@utility font-tech {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, #4f46e5 12%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, #4f46e5 12%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
 @layer base {
+
   * {
     border-color: var(--border-subtle);
   }
