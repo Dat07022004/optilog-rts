@@ -4,33 +4,31 @@ import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 const NAV = [
-  { label: "WHY", href: "#why" },
-  { label: "INTEL", href: "#intelligence" },
-  { label: "BEV", href: "#bev" },
-  { label: "ARCH", href: "#architecture" },
-  { label: "CASES", href: "#use-cases" },
-  { label: "ROADMAP", href: "#roadmap" },
-  { label: "TEAM", href: "#team" },
+  { label: "Problem", href: "#problem" },
+  { label: "Capabilities", href: "#capabilities" },
+  { label: "Warehouse view", href: "#bev" },
+  { label: "How it works", href: "#architecture" },
+  { label: "Team", href: "#team" },
 ];
 
 export function LandingHeader() {
   const [open, setOpen] = useState(false);
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link to="/" className="font-tech flex items-center gap-2 text-sm font-bold tracking-tight text-foreground">
-          <span className="flex size-7 items-center justify-center bg-primary text-primary-foreground">
+    <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-6 px-5 sm:px-8">
+        <Link to="/" className="flex items-center gap-2.5 text-[15px] font-semibold text-foreground">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Boxes className="size-4" />
           </span>
-          OPTILOG<span className="text-primary">.VISION</span>
+          OptiLog
         </Link>
 
-        <nav className="hidden items-center lg:flex">
+        <nav className="hidden items-center gap-7 lg:flex">
           {NAV.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="font-tech border-l border-border px-3 py-1.5 text-[11px] tracking-widest text-text-secondary transition-colors first:border-l-0 hover:text-primary"
+              className="text-sm text-text-secondary transition-colors hover:text-foreground"
             >
               {item.label}
             </a>
@@ -40,21 +38,21 @@ export function LandingHeader() {
         <div className="flex items-center gap-2">
           <Link
             to="/login"
-            className="font-tech hidden border border-border px-3 py-2 text-[11px] tracking-widest text-foreground transition-colors hover:bg-elevated sm:inline-flex"
+            className="hidden rounded-lg px-3.5 py-2 text-sm text-text-secondary transition-colors hover:text-foreground sm:inline-flex"
           >
-            SIGN_IN
+            Sign in
           </Link>
           <Link
             to="/dashboard"
-            className="font-tech inline-flex items-center bg-primary px-3 py-2 text-[11px] font-bold tracking-widest text-primary-foreground transition-colors hover:bg-primary-hover"
+            className="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary-hover"
           >
-            LIVE_DEMO
+            Live demo
           </Link>
           <button
             type="button"
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
-            className="inline-flex size-9 items-center justify-center border border-border text-foreground lg:hidden"
+            className="inline-flex size-9 items-center justify-center rounded-lg border border-border text-foreground lg:hidden"
           >
             {open ? <X className="size-4" /> : <Menu className="size-4" />}
           </button>
@@ -68,7 +66,7 @@ export function LandingHeader() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              className="font-tech block border-b border-border px-4 py-3 text-[11px] tracking-widest text-text-secondary hover:text-primary"
+              className="block border-b border-border px-5 py-3 text-sm text-text-secondary hover:text-foreground"
             >
               {item.label}
             </a>
@@ -82,42 +80,38 @@ export function LandingHeader() {
 export function LandingFooter() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-8 md:grid-cols-[1.5fr_1fr_1fr]">
         <div>
-          <div className="font-tech flex items-center gap-2 text-sm font-bold text-foreground">
-            <span className="flex size-7 items-center justify-center bg-primary text-primary-foreground">
+          <div className="flex items-center gap-2.5 text-[15px] font-semibold text-foreground">
+            <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
               <Boxes className="size-4" />
             </span>
-            OPTILOG<span className="text-primary">.VISION</span>
+            OptiLog
           </div>
-          <p className="mt-3 max-w-sm text-sm text-text-secondary">
-            On-prem computer vision for high-throughput warehouses: multi-camera tracking,
-            unified bird's-eye view, bottleneck detection and replay.
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-text-secondary">
+            Local AI that turns existing warehouse cameras into one live operational picture.
           </p>
         </div>
         <div>
-          <p className="font-tech text-[11px] tracking-widest text-primary">PRODUCT</p>
-          <ul className="mt-3 space-y-2 text-sm text-text-secondary">
-            <li><Link to="/dashboard" className="hover:text-foreground">Operations dashboard</Link></li>
-            <li><Link to="/bev" className="hover:text-foreground">Bird's eye view</Link></li>
+          <p className="text-sm font-medium text-foreground">Product</p>
+          <ul className="mt-4 space-y-2.5 text-sm text-text-secondary">
+            <li><Link to="/dashboard" className="hover:text-foreground">Dashboard</Link></li>
+            <li><Link to="/bev" className="hover:text-foreground">Warehouse view</Link></li>
             <li><Link to="/analytics" className="hover:text-foreground">Analytics</Link></li>
             <li><Link to="/replay" className="hover:text-foreground">Replay</Link></li>
           </ul>
         </div>
         <div>
-          <p className="font-tech text-[11px] tracking-widest text-primary">PROJECT</p>
-          <ul className="mt-3 space-y-2 text-sm text-text-secondary">
+          <p className="text-sm font-medium text-foreground">Project</p>
+          <ul className="mt-4 space-y-2.5 text-sm text-text-secondary">
             <li><a href="#team" className="hover:text-foreground">Team</a></li>
             <li><a href="#roadmap" className="hover:text-foreground">Roadmap</a></li>
-            <li><a href="#overview" className="hover:text-foreground">Project overview</a></li>
             <li><Link to="/register" className="hover:text-foreground">Request access</Link></li>
           </ul>
         </div>
       </div>
-      <div className="font-tech mx-auto flex max-w-7xl flex-wrap justify-between gap-2 border-t border-border px-4 py-4 text-[10px] uppercase tracking-widest text-text-muted sm:px-6">
-        <span>LCTN: SITE_01 / NORTH_HULL</span>
-        <span>INFERENCE: ON_PREM</span>
-        <span>© 2026 OPTILOG SYSTEMS · v0.1</span>
+      <div className="mx-auto max-w-6xl border-t border-border px-5 py-5 text-xs text-text-muted sm:px-8">
+        © 2026 OptiLog · Capstone project
       </div>
     </footer>
   );
@@ -144,31 +138,28 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "scroll-mt-16 border-b border-border py-12 sm:py-16",
+        "scroll-mt-20 py-20 sm:py-24",
         tone === "surface" ? "bg-surface-subtle" : "bg-background",
         className,
       )}
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-6xl px-5 sm:px-8">
         {(eyebrow || title || lead) && (
-          <div className="mb-8">
+          <div className="max-w-2xl">
             {eyebrow && (
-              <div className="flex items-center gap-3">
-                <p className="font-tech text-[11px] uppercase tracking-widest text-primary">
-                  {eyebrow}
-                </p>
-                <span className="h-px flex-1 bg-border" />
-              </div>
+              <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
+                {eyebrow}
+              </p>
             )}
             {title && (
-              <h2 className="mt-3 text-2xl font-bold uppercase tracking-tight text-foreground sm:text-3xl">
+              <h2 className="mt-3 text-3xl font-semibold text-foreground sm:text-[2.5rem] sm:leading-tight">
                 {title}
               </h2>
             )}
-            {lead && <p className="mt-3 max-w-3xl text-sm text-text-secondary sm:text-base">{lead}</p>}
+            {lead && <p className="mt-4 text-base leading-relaxed text-text-secondary">{lead}</p>}
           </div>
         )}
-        {children}
+        <div className={cn(eyebrow || title || lead ? "mt-12" : undefined)}>{children}</div>
       </div>
     </section>
   );
@@ -178,41 +169,36 @@ export function Card({
   title,
   children,
   icon,
-  badge,
   className,
 }: {
   title: string;
   children: ReactNode;
   icon?: ReactNode;
-  badge?: string;
   className?: string;
 }) {
   return (
     <div
       className={cn(
-        "group relative border border-border border-l-2 border-l-primary bg-surface p-5 transition-colors hover:bg-elevated/40",
+        "rounded-2xl border border-border bg-surface p-6 transition-colors hover:border-border-strong",
         className,
       )}
     >
-      {badge && (
-        <span className="font-tech absolute right-0 top-0 bg-primary px-2 py-0.5 text-[9px] tracking-widest text-primary-foreground">
-          {badge}
+      {icon && (
+        <span className="mb-4 inline-flex size-10 items-center justify-center rounded-xl bg-primary-soft text-primary">
+          {icon}
         </span>
       )}
-      <div className="flex items-center gap-2 text-primary">
-        {icon}
-        <h3 className="font-tech text-sm font-bold uppercase text-foreground">{title}</h3>
-      </div>
-      <p className="mt-3 text-[13px] leading-relaxed text-text-secondary">{children}</p>
+      <h3 className="text-base font-semibold text-foreground">{title}</h3>
+      <p className="mt-2 text-sm leading-relaxed text-text-secondary">{children}</p>
     </div>
   );
 }
 
 export function DataRow({ k, v }: { k: string; v: string }) {
   return (
-    <div className="flex items-baseline justify-between gap-4 border-b border-border py-2">
-      <span className="font-tech text-[10px] uppercase tracking-widest text-text-muted">{k}</span>
-      <span className="text-right text-[13px] text-foreground">{v}</span>
+    <div className="flex items-baseline justify-between gap-6 border-b border-border py-3 last:border-b-0">
+      <span className="text-sm font-medium text-foreground">{k}</span>
+      <span className="text-right text-sm text-text-secondary">{v}</span>
     </div>
   );
 }
