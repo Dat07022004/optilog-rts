@@ -297,7 +297,7 @@ function LandingPage() {
               lead="A streaming pipeline turns raw frames into structured events in under a fifth of a second."
             />
             <div className="grid gap-4 sm:grid-cols-6">
-              <Reveal className="sm:col-span-3 sm:row-span-2">
+              <Reveal className="sm:col-span-6 lg:col-span-2 lg:row-span-3">
                 <Tile className="h-full">
                   <img
                     src={uiDashboard}
@@ -325,7 +325,7 @@ function LandingPage() {
                 { t: "Analytics", b: "Throughput, utilisation and shift comparisons.", icon: <LineChart className="size-5" /> },
                 { t: "Replay", b: "Scrub back and follow an object's full path.", icon: <Activity className="size-5" /> },
               ].map((c, i) => (
-                <Reveal key={c.t} delay={80 + i * 60} className="sm:col-span-3 lg:col-span-1 sm:col-start-4 lg:col-start-auto">
+                <Reveal key={c.t} delay={80 + i * 60} className="sm:col-span-3 lg:col-span-2">
                   <Tile className="h-full">
                     <div className="p-5">
                       <span className="mb-3 inline-flex size-9 items-center justify-center rounded-xl bg-primary-soft text-primary">
