@@ -182,6 +182,86 @@
   font-family: "JetBrains Mono", ui-monospace, monospace;
 }
 
+/* Pointer spotlight used by bento tiles. */
+@utility spotlight {
+  position: relative;
+}
+
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(
+    240px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+    color-mix(in oklab, var(--brand-primary) 22%, transparent),
+    transparent 70%
+  );
+}
+
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+@utility aurora {
+  background: radial-gradient(
+      600px circle at 15% 20%,
+      color-mix(in oklab, #6366f1 30%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(500px circle at 85% 10%, color-mix(in oklab, #34d399 16%, transparent), transparent 60%),
+    radial-gradient(700px circle at 60% 90%, color-mix(in oklab, #818cf8 20%, transparent), transparent 65%);
+  animation: aurora-drift 18s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-drift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-3%, 3%, 0) scale(1.08); }
+}
+
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, #6366f1 10%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, #6366f1 10%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility marquee-track {
+  animation: marquee 26s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@utility float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand-primary) 55%, transparent); }
+  70% { box-shadow: 0 0 0 12px color-mix(in oklab, var(--brand-primary) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--brand-primary) 0%, transparent); }
+}
+
+@utility pulse-ring {
+  animation: pulse-ring 2.4s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .marquee-track, .float-soft, .pulse-ring { animation: none; }
+}
+
+
 
 @layer base {
 
